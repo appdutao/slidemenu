@@ -1,8 +1,11 @@
 package com.dutao.slidemenu;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Window;
 
+import com.dutao.slidemenu.fragment.MenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -25,5 +28,19 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setShadowDrawable(R.drawable.shadow);
         slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 
+        MenuFragment menuFragment = new MenuFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.menu,menuFragment,"MENU")
+                .commit();
+    }
+
+    public void switchContent2Fragment(Fragment fragment) {
+        if(fragment != null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame,fragment,"CONTENT")
+                    .commit();
+        }
     }
 }
